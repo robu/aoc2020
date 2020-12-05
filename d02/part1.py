@@ -13,24 +13,26 @@ class Rule:
 
     def to_s(self): return "{0}-{1}: {2}".format(self.range.start, self.range.stop+1, self.letter)
 
-    def valid_pw(self, pw):
-#        print("validating '{0}' with {1}".format(pw, self.to_s()))
-        return pw.count(self.letter) in self.range
+    def validate(self, pw, validation_fun):
+        return validation_fun(self, pw)
 
 def build_rule(s):
-#    pattern = r'^(\d+)-(\d+) (\w)'
     m = re.match(r'^(\d+)-(\d+) (\w)', s)
     return Rule(range(int(m.group(1)), int(m.group(2))+1), m.group(3))
 
-def line_is_valid(line):
+def line_is_valid(line, valfun):
     rule = build_rule(line)
     pw = re.match(r'^.+: (\w+)$', line).group(1)
-    return rule.valid_pw(pw)
+    return rule.validate(pw, valfun)
+
+# this is for part 1
+def valid_pw(rule, pw):
+    return pw.count(rule.letter) in rule.range
 
 if __name__ == '__main__':
     lines = read_input()
     count = 0
     for line in lines:
-        if line_is_valid(line):
+        if line_is_valid(line, valid_pw):
             count = count + 1
     print(count)
