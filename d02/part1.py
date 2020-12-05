@@ -30,9 +30,8 @@ def valid_pw(rule, pw):
     return pw.count(rule.letter) in rule.range
 
 if __name__ == '__main__':
-    lines = read_input()
     count = 0
-    for line in lines:
+    for line in read_input():
         if line_is_valid(line, valid_pw):
             count = count + 1
     print(count)
