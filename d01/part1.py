@@ -4,15 +4,14 @@ def read_input():
         lines = a_file.read().splitlines()
     return [int(s) for s in lines]
 
-def find_sum_pair(target_value, term, arr):
-    other_term = target_value - term
+def find_sum_pair(target_value, arr):
+    if len(arr) < 2: raise ValueError
     try:
-        index = arr.index(other_term)
-        return (term, other_term)
+        index = arr[1:].index(target_value - arr[0])
+        return (arr[0], target_value - arr[0])
     except:
-        return find_sum_pair(target_value, arr[0], arr[1:])
+        return find_sum_pair(target_value, arr[1:])
 
 if __name__ == '__main__':
-    in_data_vals = read_input()
-    num1, num2 = find_sum_pair(2020, in_data_vals[0], in_data_vals[1:])
+    num1, num2 = find_sum_pair(2020, read_input())
     print("{0} * {1} = {2}".format(num1, num2, num1*num2))
