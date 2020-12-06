@@ -24,10 +24,18 @@ class Slope:
         return self.pos_line >= len(self.lines)
 
 class Part1Slope(Slope):
-    def __init__(self, filename, delta_lines, delta_cols):
+    def __init__(self, filename):
         super().__init__(filename)
+        self.delta_lines = 1
+        self.delta_cols = 1
+
+    def set_deltas(self, delta_lines, delta_cols):
         self.delta_lines = delta_lines
         self.delta_cols = delta_cols
+
+    def restart_pos(self):
+        self.pos_line = 0
+        self.pos_col = 0
 
     def move(self):
         l = self.pos_line
@@ -44,5 +52,6 @@ class Part1Slope(Slope):
         return count
 
 if __name__ == '__main__':
-    slope = Part1Slope('input.txt', 1, 3)
+    slope = Part1Slope('input.txt')
+    slope.set_deltas(1,3)
     print(slope.count_trees())
