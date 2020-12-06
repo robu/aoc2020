@@ -8,8 +8,8 @@ def read_input():
 
 
 if __name__ == '__main__':
-    answers = set()
-    groups = []
+    answers = set() # one set of answers per group
+    groups = [] # list of all groups' sets of answers
     count = 0
     for line in read_input():
         if len(line) == 0:
