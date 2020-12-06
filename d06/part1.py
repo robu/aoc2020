@@ -21,5 +21,7 @@ if __name__ == '__main__':
             answers.add(c)
 
     print(count)
+
+    # count the sum in a different way, to confirm. however, the results are the same
     c2 = reduce(lambda acc, elem: acc+elem, map(lambda x: len(x), groups), 0)
     print(c2)
