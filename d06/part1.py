@@ -17,8 +17,10 @@ if __name__ == '__main__':
             groups.append(answers)
             print("{0} ({1}): {2}".format(len(answers), count, answers))
             answers = set()
-        for c in line:
-            answers.add(c)
+        else:
+            for c in line:
+                answers.add(c)
+    if (len(answers) > 0): groups.append(answers)
 
     print(count)
 
