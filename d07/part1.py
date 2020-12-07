@@ -45,11 +45,15 @@ def find_color(br_db, br, color):
                     return True
             return False
 
-if __name__ == '__main__':
+def build_rule_dict():
     rules = {}
     for line in read_input():
         br = BagRule.build(line)
         rules[br.color] = br
+    return rules
+
+if __name__ == '__main__':
+    rules = build_rule_dict()
     count = 0
     looking_for = 'shiny gold'
     rules.pop(looking_for) # dont include first level bag
