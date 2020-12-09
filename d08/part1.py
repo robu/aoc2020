@@ -8,6 +8,9 @@ def read_input():
 
 class CPU:
     def __init__(self, lines):
+        self.reset(lines)
+
+    def reset(self, lines):
         self.accumulator = 0
         self.memory = []
         self.run_history = []
@@ -23,7 +26,7 @@ class CPU:
         self.run_history.append(False)
 
     def run_until_loop(self):
-        while not self.run_history[self.pointer]:
+        while not (self.pointer >= len(self.memory) or self.run_history[self.pointer]):
             operation, argument = self.memory[self.pointer]
             self.run_history[self.pointer] = True
             if operation == 'acc':
@@ -33,9 +36,13 @@ class CPU:
                 self.pointer += argument
             else:
                 self.pointer += 1
+        return self.pointer >= len(self.memory) # true if ran all the way to the end
+
+    def __str(self, addr):
+        return "{}: {} {:+d}".format(addr, self.memory[addr][0], self.memory[addr][1])
 
     def __str__(self):
-        return "\n".join(["{}: {} {:+d}".format(addr, self.memory[addr][0], self.memory[addr][1]) for addr in range(0,len(self.memory))])
+        return "\n".join([self.__str(addr) for addr in range(0,len(self.memory))])
 
 if __name__ == '__main__':
     cpu = CPU(read_input())
