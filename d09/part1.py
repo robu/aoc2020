@@ -16,9 +16,13 @@ def has_sum_of_2(target, arr):
     except:
         return has_sum_of_2(target, arr[1:])
 
-if __name__ == '__main__':
+def part1answer(nums):
     window_size = 25
-    nums = read_input()
     for i in range(window_size, len(nums)):
         if not has_sum_of_2(nums[i], nums[i-window_size : i]):
-            print(nums[i])
+            return nums[i]
+
+
+if __name__ == '__main__':
+    nums = read_input()
+    print(part1answer(nums))
