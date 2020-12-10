@@ -2,7 +2,7 @@ def read_input():
     nums = []
     with open('input.txt') as a_file:
         nums = [int(a) for a in a_file.read().splitlines()]
-    return nums
+    return nums.sorted()
 
 if __name__ == '__main__':
     nums = read_input()
@@ -12,7 +12,7 @@ if __name__ == '__main__':
     prev_jolt = base
     delta1_count = 0
     delta3_count = 0
-    for n in sorted(nums):
+    for n in nums:
         delta = n - prev_jolt
         if delta <= max_delta and n + max_delta <= target:
             if delta == 1: delta1_count += 1
