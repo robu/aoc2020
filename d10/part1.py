@@ -22,4 +22,3 @@ if __name__ == '__main__':
 
     print("d1: {}, d3: {}".format(delta1_count, delta3_count))
     print("product: {}".format(delta1_count * delta3_count))
-    # print(sorted(nums))
