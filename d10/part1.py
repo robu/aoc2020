@@ -2,7 +2,7 @@ def read_input():
     nums = []
     with open('input.txt') as a_file:
         nums = [int(a) for a in a_file.read().splitlines()]
-    return nums.sorted()
+    return sorted(nums)
 
 if __name__ == '__main__':
     nums = read_input()
