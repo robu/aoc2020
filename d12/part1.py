@@ -20,10 +20,14 @@ class Ferry:
         #print("__degrees_to_dir, {} => {}".format(deg,"ENWS"[int(((360+deg) / 90) % 4)]))
         return "ENWS"[int(((360+deg) / 90) % 4)]
 
-    def move(self, instruction):
+    def __action_value(self, instruction):
         parts = re.match(r'^([NSWELRF])(\d+)$', instruction)
         action = parts.group(1)
         value = int(parts.group(2))
+        return (action, value)
+
+    def move(self, instruction):
+        action, value = self.__action_value(instruction)
         if action == 'F':
             action = self.direction
 
@@ -51,5 +55,5 @@ if __name__ == '__main__':
     ferry = Ferry()
     for line in lines:
         ferry.move(line)
-    print("After move, {}".format(ferry))
+    print(ferry)
     print("Manhattan distance: {}".format(ferry.manhattan_distance()))
